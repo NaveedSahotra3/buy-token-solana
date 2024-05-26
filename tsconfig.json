@@ -7,11 +7,11 @@
     "skipLibCheck": true,
     "moduleResolution": "Node",
     "jsx": "react",
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "allowSyntheticDefaultImports": true,
     "types": [
       "vite-plugin-svgr/client"
-    ],
+    ]
   },
   "include": [
     "src/**/*",
