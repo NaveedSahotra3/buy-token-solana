@@ -2,16 +2,15 @@ const path = require('path');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-// const BundleAnalyzerPlugin =
-//   require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'production',
   entry: './widget/widget.js',
   output: {
-    // filename: './webpack/bundle.js',
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    clean: true, // Ensures the output directory is cleaned before each build
   },
   cache: {
     type: 'filesystem',
@@ -30,6 +29,9 @@ module.exports = {
     },
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'index.html'), // Generates an HTML file with the <script> injected
+    }),
     // new BundleAnalyzerPlugin(),
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
@@ -85,7 +87,7 @@ module.exports = {
         test: /\.m?js$/,
         include: [
           path.resolve(__dirname, '../src'),
-          path.resolve(__dirname, '../widget'),
+          path.resolve(__dirname, 'widget'),
         ],
         exclude: /(node_modules|bower_components)/,
         use: [
