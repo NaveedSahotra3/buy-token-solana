@@ -10,16 +10,12 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    clean: true, // Ensures the output directory is cleaned before each build
+    clean: true,
   },
   cache: {
     type: 'filesystem',
     allowCollectingMemory: true,
   },
-  // externals: {
-  //   react: 'window.React',
-  //   'react-dom': 'window.ReactDOM',
-  // },
   devtool: false,
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
@@ -30,7 +26,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'index.html'), // Generates an HTML file with the <script> injected
+      template: path.resolve(__dirname, 'index.html'),
+      filename: 'index.html', // This ensures the file is named correctly in the output directory
     }),
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
