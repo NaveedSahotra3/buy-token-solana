@@ -32,7 +32,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'index.html'), // Generates an HTML file with the <script> injected
     }),
-    // new BundleAnalyzerPlugin(),
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
     }),
@@ -48,33 +47,16 @@ module.exports = {
         parallel: true,
         extractComments: false,
         terserOptions: {
-          // https://github.com/terser/terser#minify-options
           compress: {
             ecma: 5,
             warnings: false,
             drop_debugger: true,
             drop_console: true,
-            // pure_funcs: ["console.log"],
           },
         },
       }),
       new CssMinimizerPlugin(),
     ],
-    // splitChunks: {
-    //   chunks: 'all', // initial、async和all
-    //   minSize: 30000, // 形成一个新代码块最小的体积
-    //   minChunks: 2, // 引入两次及以上被打包
-    //   automaticNameDelimiter: '.',
-    //   cacheGroups: {
-    //     ethersproject: {
-    //       name: 'ethersproject',
-    //       chunks: 'all',
-    //       minChunks: 1,
-    //       test: /[\\/]node_modules[\\/](@ethersproject)/,
-    //       priority: 10,
-    //     },
-    //   },
-    // },
   },
   module: {
     rules: [
@@ -131,9 +113,7 @@ module.exports = {
       {
         test: /\.svg$/i,
         include: [path.resolve(__dirname, '../src')],
-        use: [
-          'url-loader',
-        ],
+        use: ['url-loader'],
       },
     ],
   },
